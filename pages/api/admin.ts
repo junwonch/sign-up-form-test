@@ -14,9 +14,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
   if (req.query.csv) {
     // Flatten for CSV
-    const rows = participants.flatMap(p =>
+    const rows = participants.flatMap((p: any) =>
       p.availabilities.length
-        ? p.availabilities.map(a => ({
+        ? p.availabilities.map((a: any) => ({
             name: p.name,
             email: p.email,
             instrument: p.instrument.join('; '),
