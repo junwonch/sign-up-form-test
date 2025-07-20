@@ -3,7 +3,7 @@ import AvailabilityForm from '../components/AvailabilityForm';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
       <Hero />
       <AvailabilityForm />
     </main>
