@@ -18,8 +18,17 @@ const INSTRUMENT_ICONS: Record<string, string> = {
   'Other': '🎵',
 };
 
+interface FormState {
+  name: string;
+  email: string;
+  instrument: string[];
+  notes: string;
+  availabilities: Array<{ start: Date; end: Date }>;
+  slot: { start: string; end: string };
+}
+
 export default function AvailabilityForm() {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     name: '',
     email: '',
     instrument: [],
@@ -32,26 +41,34 @@ export default function AvailabilityForm() {
   const [loading, setLoading] = useState(false);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+    setForm((f: FormState) => ({ ...f, [e.target.name]: e.target.value }));
   }
+  
   function handleInstrument(i: string) {
-    setForm(f => ({ ...f, instrument: f.instrument.includes(i) ? f.instrument.filter(x => x !== i) : [...f.instrument, i] }));
+    setForm((f: FormState) => ({ 
+      ...f, 
+      instrument: f.instrument.includes(i) ? f.instrument.filter((x: string) => x !== i) : [...f.instrument, i] 
+    }));
   }
+  
   function handleSlotChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setForm(f => ({ ...f, slot: { ...f.slot, [e.target.name]: e.target.value } }));
+    setForm((f: FormState) => ({ ...f, slot: { ...f.slot, [e.target.name]: e.target.value } }));
   }
+  
   function addSlot() {
     const { start, end } = form.slot;
     if (!start || !end) return setError('Select start and end time');
     const newSlot = { start: new Date(start), end: new Date(end) };
     if (newSlot.start >= newSlot.end) return setError('End must be after start');
-    if (form.availabilities.some((a: any) => isOverlap(a, newSlot))) return setError('Slot overlaps with existing');
-    setForm(f => ({ ...f, availabilities: [...f.availabilities, newSlot], slot: { start: '', end: '' } }));
+    if (form.availabilities.some((a: { start: Date; end: Date }) => isOverlap(a, newSlot))) return setError('Slot overlaps with existing');
+    setForm((f: FormState) => ({ ...f, availabilities: [...f.availabilities, newSlot], slot: { start: '', end: '' } }));
     setError('');
   }
+  
   function removeSlot(idx: number) {
-    setForm(f => ({ ...f, availabilities: f.availabilities.filter((_, i) => i !== idx) }));
+    setForm((f: FormState) => ({ ...f, availabilities: f.availabilities.filter((_, i: number) => i !== idx) }));
   }
+  
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(''); setSuccess('');
@@ -80,6 +97,7 @@ export default function AvailabilityForm() {
       setLoading(false);
     }
   }
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-12 px-4">
       <form id="signup" className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20" onSubmit={handleSubmit}>
@@ -192,10 +210,10 @@ export default function AvailabilityForm() {
             {form.availabilities.length > 0 && (
               <div className="space-y-2">
                 <h4 className="font-semibold text-gray-700">Your Available Times:</h4>
-                {form.availabilities.map((a: any, i: number) => (
+                {form.availabilities.map((a: { start: Date; end: Date }, i: number) => (
                   <div key={i} className="flex items-center justify-between p-3 bg-white rounded-xl border border-yellow-200">
                     <span className="text-sm">
-                      📅 {a.start.toLocaleString?.() || a.start} - {a.end.toLocaleString?.() || a.end}
+                      📅 {a.start.toLocaleString?.() || a.start.toString()} - {a.end.toLocaleString?.() || a.end.toString()}
                     </span>
                     <button 
                       type="button" 
