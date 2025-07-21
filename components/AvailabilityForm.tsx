@@ -99,11 +99,11 @@ export default function AvailabilityForm() {
   }
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-12 px-4">
-      <form id="signup" className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/20" onSubmit={handleSubmit}>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 py-12 px-4">
+      <form id="signup" className="max-w-2xl mx-auto bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl p-8 border border-white/30" onSubmit={handleSubmit}>
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">🎵</span>
+          <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <span className="text-3xl">🎵</span>
           </div>
           <h2 className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
             Sign Up / Update Availability
@@ -112,13 +112,13 @@ export default function AvailabilityForm() {
         </div>
         
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 flex items-center">
+          <div className="mb-6 p-4 bg-red-100 border-2 border-red-300 rounded-xl text-red-700 flex items-center">
             <span className="mr-2">⚠️</span>
             {error}
           </div>
         )}
         {success && (
-          <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl text-green-700 flex items-center">
+          <div className="mb-6 p-4 bg-green-100 border-2 border-green-300 rounded-xl text-green-700 flex items-center">
             <span className="mr-2">✅</span>
             {success}
           </div>
@@ -130,7 +130,7 @@ export default function AvailabilityForm() {
               <label className="block text-sm font-semibold text-gray-700 mb-2">👤 Name *</label>
               <input 
                 name="name" 
-                className="w-full p-4 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all" 
+                className="w-full p-4 rounded-xl bg-gradient-to-r from-blue-100 to-purple-100 border-2 border-blue-300 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all" 
                 value={form.name} 
                 onChange={handleChange} 
                 required 
@@ -141,7 +141,7 @@ export default function AvailabilityForm() {
               <input 
                 name="email" 
                 type="email" 
-                className="w-full p-4 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all" 
+                className="w-full p-4 rounded-xl bg-gradient-to-r from-blue-100 to-purple-100 border-2 border-blue-300 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all" 
                 value={form.email} 
                 onChange={handleChange} 
                 required 
@@ -160,7 +160,7 @@ export default function AvailabilityForm() {
                   className={`p-3 rounded-xl border-2 transition-all duration-200 flex items-center justify-center ${
                     form.instrument.includes(i) 
                       ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-purple-500 shadow-lg transform scale-105' 
-                      : 'bg-white border-gray-200 hover:border-purple-300 hover:bg-purple-50'
+                      : 'bg-white border-gray-300 hover:border-purple-400 hover:bg-purple-100 shadow-md'
                   }`}
                 >
                   <span className="mr-2">{INSTRUMENT_ICONS[i]}</span>
@@ -174,7 +174,7 @@ export default function AvailabilityForm() {
             <label className="block text-sm font-semibold text-gray-700 mb-2">📝 Notes</label>
             <textarea 
               name="notes" 
-              className="w-full p-4 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all resize-none" 
+              className="w-full p-4 rounded-xl bg-gradient-to-r from-blue-100 to-purple-100 border-2 border-blue-300 focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all resize-none" 
               rows={3}
               value={form.notes} 
               onChange={handleChange} 
@@ -182,7 +182,7 @@ export default function AvailabilityForm() {
             />
           </div>
           
-          <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-2xl border border-yellow-200">
+          <div className="bg-gradient-to-r from-yellow-100 to-orange-100 p-6 rounded-2xl border-2 border-yellow-300 shadow-lg">
             <label className="block text-sm font-semibold text-gray-700 mb-3">⏰ Add Availability Slot *</label>
             <div className="grid md:grid-cols-3 gap-3 mb-4">
               <input 
@@ -190,14 +190,14 @@ export default function AvailabilityForm() {
                 name="start" 
                 value={form.slot.start} 
                 onChange={handleSlotChange} 
-                className="p-3 rounded-xl bg-white border border-yellow-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all" 
+                className="p-3 rounded-xl bg-white border-2 border-yellow-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all shadow-md" 
               />
               <input 
                 type="datetime-local" 
                 name="end" 
                 value={form.slot.end} 
                 onChange={handleSlotChange} 
-                className="p-3 rounded-xl bg-white border border-yellow-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all" 
+                className="p-3 rounded-xl bg-white border-2 border-yellow-300 focus:border-orange-400 focus:ring-2 focus:ring-orange-200 transition-all shadow-md" 
               />
               <button 
                 type="button" 
@@ -211,14 +211,14 @@ export default function AvailabilityForm() {
               <div className="space-y-2">
                 <h4 className="font-semibold text-gray-700">Your Available Times:</h4>
                 {form.availabilities.map((a: { start: Date; end: Date }, i: number) => (
-                  <div key={i} className="flex items-center justify-between p-3 bg-white rounded-xl border border-yellow-200">
+                  <div key={i} className="flex items-center justify-between p-3 bg-white rounded-xl border-2 border-yellow-300 shadow-md">
                     <span className="text-sm">
                       📅 {a.start.toLocaleString?.() || a.start.toString()} - {a.end.toLocaleString?.() || a.end.toString()}
                     </span>
                     <button 
                       type="button" 
                       onClick={() => removeSlot(i)} 
-                      className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-50 transition-colors"
+                      className="text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-red-100 transition-colors"
                     >
                       ❌
                     </button>
